@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registro de Usuario</title>
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+  <div class="contenedor">
+    <h2>Crear Cuenta</h2>
+
+    <form id="registroForm" onsubmit="return validarRegistro()">
+      <input type="text" id="nombre" placeholder="Nombres" required>
+      <input type="text" id="apellido" placeholder="Apellidos" required>
+      <input type="tel" id="telefono" placeholder="Teléfono" required>
+      <input type="email" id="correo" placeholder="Correo electrónico" required>
+      <input type="password" id="clave1" placeholder="Contraseña" required>
+      <input type="password" id="clave2" placeholder="Confirmar contraseña" required>
+      <button type="submit">Registrarse</button>
+    </form>
+
+    <a href="index.html">Volver al inicio</a>
+  </div>
+
+  <script>
+    function validarRegistro() {
+      var clave1 = document.getElementById("clave1").value;
+      var clave2 = document.getElementById("clave2").value;
+
+      if (clave1 != clave2) {
+        alert("Las contraseñas no coinciden.");
+        return false;
+      } else {
+        alert("Registro completado correctamente.");
+        window.location.href = "index.html";
+        return false;
+      }
+    }
+  </script>
+</body>
+</html>

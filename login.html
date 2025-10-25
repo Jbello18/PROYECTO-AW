@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Iniciar Sesión</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="contenedor">
+    <h2>Iniciar Sesión</h2>
+    <form onsubmit="return validarLogin()">
+      <input type="text" id="usuario" placeholder="Correo electrónico o usuario" onfocus="inputFoco(this)" onblur="inputFuera(this)">
+      <input type="password" id="clave" placeholder="Contraseña" onfocus="inputFoco(this)" onblur="inputFuera(this)">
+      <button type="submit">Entrar</button>
+    </form>
+    <div class="enlace">
+      <p>¿No tienes cuenta? <a href="registro.html">Regístrate aquí</a></p>
+    </div>
+  </div>
+
+  <script src="login.js"></script>
+</body>
+</html>
