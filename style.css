@@ -1,132 +1,277 @@
-/* ===== ESTILOS GENERALES ===== */
+/* styles.css */
+
+/* --- Estilos Globales --- */
 body {
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #4e73df, #1cc88a);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7f9; /* Fondo suave */
+    color: #333;
 }
 
-/* ===== CONTENEDOR PRINCIPAL ===== */
+h1, h2 {
+    color: #004d99; /* Azul institucional */
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 10px;
+}
+
+/* --- Estilos de Navegación/Header (index.html) --- */
+.header {
+    background-color: #0056b3;
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header h1 {
+    margin: 0;
+    color: white;
+    border-bottom: none;
+    cursor: pointer;
+}
+
+.nav a, .nav button {
+    background: none;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.nav a:hover, .nav button:hover {
+    background-color: #003d7a;
+}
+
+/* --- Contenedor Principal de la App --- */
+.main-container {
+    padding: 20px 30px;
+}
+
+.vista {
+    display: none;
+    padding: 20px 0;
+}
+
+.vista.activa {
+    display: block;
+}
+
+/* --- Formulario de Creación de Eventos --- */
+#formulario-evento {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    max-width: 800px;
+    margin-top: 20px;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+#formulario-evento label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+#formulario-evento input, #formulario-evento textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+#formulario-evento textarea {
+    grid-column: 1 / -1; /* Ocupa ambas columnas */
+    min-height: 100px;
+}
+
+#formulario-evento button[type="submit"] {
+    grid-column: 1 / -1;
+    background-color: #28a745; /* Verde para acción principal */
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.3s;
+}
+
+#formulario-evento button[type="submit"]:hover {
+    background-color: #1e7e34;
+}
+
+/* --- Estilos de Tarjetas de Eventos --- */
+.grid-eventos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.tarjeta-evento {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #0056b3;
+    transition: transform 0.2s;
+}
+
+.tarjeta-evento:hover {
+    transform: translateY(-5px);
+}
+
+.meta-evento i {
+    margin-right: 5px;
+    color: #0056b3;
+}
+
+.cupo-info {
+    font-size: 0.9em;
+    color: #888;
+    margin-top: 10px;
+}
+
+.btn-registro {
+    background-color: #ffc107;
+    color: #333;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btn-registro:hover {
+    background-color: #e0a800;
+}
+
+.btn-registro:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+
+/* --- Estilos de Gestión (Mis Eventos) --- */
+.gestion-item {
+    background: white;
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 4px solid #0056b3;
+}
+
+.gestion-item button {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.gestion-item button:hover {
+    background-color: #5a6268;
+}
+
+/* --- Estilos de Login/Registro (vista-global) --- */
+.vista-global {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0056b3;
+}
+
 .contenedor {
-  background-color: #fff;
-  padding: 40px 35px;
-  border-radius: 15px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-  width: 100%;
-  max-width: 380px;
-  transition: transform 0.3s ease;
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
 }
 
-.contenedor:hover {
-  transform: translateY(-5px);
+.contenedor h2 {
+    color: #004d99;
+    margin-bottom: 25px;
+    border-bottom: none;
 }
 
-h2 {
-  text-align: center;
-  color: #333;
-  margin-bottom: 25px;
+.contenedor form input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
 }
 
-/* ===== CAMPOS DE TEXTO ===== */
-input[type="text"],
-input[type="password"],
-input[type="email"] {
-  width: 100%;
-  padding: 12px;
-  margin: 10px 0;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-  font-size: 1em;
-  outline: none;
-  transition: border-color 0.3s, box-shadow 0.3s;
+.contenedor form button {
+    width: 100%;
+    background-color: #0056b3;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.3s;
 }
 
-input:focus {
-  border-color: #4e73df;
-  box-shadow: 0 0 6px rgba(78, 115, 223, 0.5);
+.contenedor form button:hover {
+    background-color: #003d7a;
 }
 
-/* ===== BOTONES ===== */
-button {
-  width: 100%;
-  padding: 12px;
-  margin-top: 10px;
-  border: none;
-  border-radius: 8px;
-  background: linear-gradient(135deg, #4e73df, #224abe);
-  color: white;
-  font-weight: 600;
-  font-size: 1em;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
-}
-
-button:hover {
-  background: linear-gradient(135deg, #1cc88a, #17a673);
-  transform: scale(1.03);
-}
-
-/* ===== MENSAJES DE ERROR ===== */
-.error {
-  color: #e74a3b;
-  font-size: 0.9em;
-  display: none;
-  margin-top: -5px;
-  margin-bottom: 5px;
-}
-
-/* ===== ESTILOS DE VALIDACIÓN ===== */
-.input-error {
-  border: 2px solid #e74a3b;
-}
-
-/* ===== FEEDBACK DE USUARIO ===== */
-.feedback {
-  font-size: 0.85em;
-  margin-top: 5px;
-}
-
-.valido {
-  color: #1cc88a;
-}
-
-.invalido {
-  color: #e74a3b;
-}
-
-/* ===== BARRA DE FUERZA DE CONTRASEÑA ===== */
-#strengthMeter {
-  width: 100%;
-  height: 6px;
-  background: #ddd;
-  border-radius: 5px;
-  overflow: hidden;
-  margin: 5px 0 10px;
-}
-
-.strength-bar {
-  height: 100%;
-  width: 0;
-  border-radius: 5px;
-  transition: width 0.3s, background 0.3s;
-}
-
-/* ===== ENLACES ===== */
-.enlace {
-  text-align: center;
-  margin-top: 10px;
+.enlace p {
+    margin-top: 20px;
+    font-size: 0.9em;
 }
 
 .enlace a {
-  color: #4e73df;
-  text-decoration: none;
-  font-weight: 600;
+    color: #0056b3;
+    text-decoration: none;
+    font-weight: bold;
 }
 
 .enlace a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
+}
+
+/* Mensajes de Error y Validación */
+.mensaje-error {
+    display: block;
+    color: #dc3545; /* Rojo de error */
+    font-size: 0.85em;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.valido {
+    border-color: #28a745 !important;
+}
+
+.invalido {
+    border-color: #dc3545 !important;
 }

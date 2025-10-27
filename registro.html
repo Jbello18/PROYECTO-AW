@@ -1,41 +1,46 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Registro de Usuario</title>
-  <link rel="stylesheet" href="estilos.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Cuenta</title>
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-  <div class="contenedor">
-    <h2>Crear Cuenta</h2>
 
-    <form id="registroForm" onsubmit="return validarRegistro()">
-      <input type="text" id="nombre" placeholder="Nombres" required>
-      <input type="text" id="apellido" placeholder="Apellidos" required>
-      <input type="tel" id="telefono" placeholder="Teléfono" required>
-      <input type="email" id="correo" placeholder="Correo electrónico" required>
-      <input type="password" id="clave1" placeholder="Contraseña" required>
-      <input type="password" id="clave2" placeholder="Confirmar contraseña" required>
-      <button type="submit">Registrarse</button>
-    </form>
-
-    <a href="index.html">Volver al inicio</a>
-  </div>
-
-  <script>
-    function validarRegistro() {
-      var clave1 = document.getElementById("clave1").value;
-      var clave2 = document.getElementById("clave2").value;
-
-      if (clave1 != clave2) {
-        alert("Las contraseñas no coinciden.");
-        return false;
-      } else {
-        alert("Registro completado correctamente.");
-        window.location.href = "index.html";
-        return false;
-      }
-    }
-  </script>
+    <div id="vista-registro" class="vista-global">
+        <div class="contenedor">
+            <h2><i class="fas fa-user-plus"></i> Crear Cuenta</h2>
+            <form id="registroForm">
+                <input type="text" id="nombre" placeholder="Nombres" onfocus="inputFoco(this)" onblur="inputFuera(this)">
+                <span id="errorNombre" class="mensaje-error"></span>
+                
+                <input type="text" id="apellido" placeholder="Apellidos" onfocus="inputFoco(this)" onblur="inputFuera(this)">
+                <span id="errorApellido" class="mensaje-error"></span>
+                
+                <input type="tel" id="celular" placeholder="Celular (10 dígitos)" onfocus="inputFoco(this)" onblur="inputFuera(this)">
+                <span id="errorCelular" class="mensaje-error"></span>
+                
+                <input type="email" id="email" placeholder="Correo electrónico" onfocus="inputFoco(this)" onblur="inputFuera(this)">
+                <span id="errorEmail" class="mensaje-error"></span>
+                
+                <input type="password" id="password" placeholder="Contraseña (min. 8 car.)" onfocus="inputFoco(this)" onblur="inputFuera(this)">
+                <span id="errorPassword" class="mensaje-error"></span>
+                
+                <input type="password" id="confirmar" placeholder="Confirmar contraseña" onfocus="inputFoco(this)" onblur="inputFuera(this)">
+                <span id="errorConfirmar" class="mensaje-error"></span>
+                
+                <button type="submit" id="btnRegistrar">Registrarse</button>
+            </form>
+            
+            <div class="enlace">
+                <p>¿Ya tienes cuenta? <a href="login.html">Inicia sesión</a></p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
 </body>
 </html>
