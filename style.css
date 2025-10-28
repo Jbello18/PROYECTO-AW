@@ -1,42 +1,78 @@
-/* styles.css */
+/* style.css */
+
+:root {
+    /* Paleta ULEAM Corregida (Rojo, Gris, Verde) */
+    --color-uleam-rojo: #A91A1E; /* Rojo institucional */
+    --color-uleam-gris: #6B6A69; /* Gris institucional */
+    --color-uleam-verde: #9EC54C; /* Verde institucional del logo */
+    --color-texto-claro: #ffffff;
+    --color-texto-oscuro: #333333;
+    --color-fondo-suave: #f4f4f4;
+    --color-gris-borde: #dddddd;
+}
 
 /* --- Estilos Globales --- */
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f7f9; /* Fondo suave */
-    color: #333;
+    background-color: var(--color-fondo-suave);
+    color: var(--color-texto-oscuro);
 }
 
 h1, h2 {
-    color: #004d99; /* Azul institucional */
-    border-bottom: 2px solid #e0e0e0;
+    color: var(--color-uleam-rojo);
+    border-bottom: 2px solid var(--color-gris-borde);
     padding-bottom: 10px;
 }
 
-/* --- Estilos de Navegación/Header (index.html) --- */
+/* --- Estilos de Logo --- */
+.logo-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.logo-img {
+    max-width: 250px; /* Ancho para el logo horizontal en login */
+    height: auto;
+}
+.header .logo-img {
+    /* --- AJUSTE REALIZADO AQUÍ --- */
+    height: 60px;  /* Altura fija de 60px */
+    width: auto;
+    display: block;
+    /* Añadimos un pequeño margen vertical para que no toque los bordes */
+    margin: 5px 0; 
+}
+
+/* --- Estilos de Navegación/Header (app.html) --- */
 .header {
-    background-color: #0056b3;
-    color: white;
-    padding: 15px 30px;
+    background-color: var(--color-uleam-gris);
+    color: var(--color-texto-claro);
+    /* --- AJUSTE REALIZADO AQUÍ --- */
+    padding: 0 30px; /* 0 padding vertical, 30px horizontal */
     display: flex;
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* La altura total será 70px (60px del logo + 10px de margen) */
 }
 
 .header h1 {
     margin: 0;
-    color: white;
+    padding: 0; /* Eliminamos padding del H1 */
+    color: var(--color-texto-claro);
     border-bottom: none;
     cursor: pointer;
+    font-size: 1.5em;
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
 .nav a, .nav button {
     background: none;
     border: none;
-    color: white;
+    color: var(--color-texto-claro);
     padding: 10px 15px;
     margin-left: 10px;
     cursor: pointer;
@@ -47,8 +83,25 @@ h1, h2 {
 }
 
 .nav a:hover, .nav button:hover {
-    background-color: #003d7a;
+    background-color: #4a4a4a;
 }
+/* Botón de logout en Rojo ULEAM */
+#link-logout {
+    background-color: var(--color-uleam-rojo);
+}
+#link-logout:hover {
+    background-color: #8c1619;
+}
+/* Botón de "Registrar Info" con acento Verde */
+#link-a-info {
+    background-color: var(--color-uleam-verde);
+    color: var(--color-texto-oscuro);
+    font-weight: bold;
+}
+#link-a-info:hover {
+    background-color: #8ab03b;
+}
+
 
 /* --- Contenedor Principal de la App --- */
 .main-container {
@@ -59,7 +112,6 @@ h1, h2 {
     display: none;
     padding: 20px 0;
 }
-
 .vista.activa {
     display: block;
 }
@@ -72,36 +124,32 @@ h1, h2 {
     max-width: 800px;
     margin-top: 20px;
     padding: 20px;
-    background: white;
+    background: var(--color-texto-claro);
     border-radius: 8px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
-
 #formulario-evento label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
     color: #555;
 }
-
 #formulario-evento input, #formulario-evento textarea {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--color-gris-borde);
     border-radius: 4px;
     box-sizing: border-box;
     font-size: 1em;
 }
-
 #formulario-evento textarea {
-    grid-column: 1 / -1; /* Ocupa ambas columnas */
+    grid-column: 1 / -1;
     min-height: 100px;
 }
-
 #formulario-evento button[type="submit"] {
     grid-column: 1 / -1;
-    background-color: #28a745; /* Verde para acción principal */
-    color: white;
+    background-color: var(--color-uleam-rojo);
+    color: var(--color-texto-claro);
     padding: 12px;
     border: none;
     border-radius: 4px;
@@ -109,9 +157,8 @@ h1, h2 {
     font-size: 1.1em;
     transition: background-color 0.3s;
 }
-
 #formulario-evento button[type="submit"]:hover {
-    background-color: #1e7e34;
+    background-color: #8c1619;
 }
 
 /* --- Estilos de Tarjetas de Eventos --- */
@@ -121,65 +168,60 @@ h1, h2 {
     gap: 25px;
     margin-top: 20px;
 }
-
 .tarjeta-evento {
-    background: white;
+    background: var(--color-texto-claro);
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-left: 5px solid #0056b3;
+    border-left: 5px solid var(--color-uleam-rojo);
     transition: transform 0.2s;
 }
-
 .tarjeta-evento:hover {
     transform: translateY(-5px);
 }
-
 .meta-evento i {
     margin-right: 5px;
-    color: #0056b3;
+    color: var(--color-uleam-rojo);
 }
-
 .cupo-info {
     font-size: 0.9em;
     color: #888;
     margin-top: 10px;
 }
-
+/* Botón de registro con acento Verde */
 .btn-registro {
-    background-color: #ffc107;
-    color: #333;
+    background-color: var(--color-uleam-verde);
+    color: var(--color-texto-oscuro);
     border: none;
     padding: 8px 15px;
     border-radius: 4px;
     cursor: pointer;
     margin-top: 10px;
+    font-weight: bold;
 }
-
 .btn-registro:hover {
-    background-color: #e0a800;
+    background-color: #8ab03b;
 }
-
 .btn-registro:disabled {
     background-color: #ccc;
+    color: #777;
     cursor: not-allowed;
 }
 
 
 /* --- Estilos de Gestión (Mis Eventos) --- */
 .gestion-item {
-    background: white;
+    background: var(--color-texto-claro);
     padding: 15px;
     border-radius: 6px;
     margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-left: 4px solid #0056b3;
+    border-left: 4px solid var(--color-uleam-gris);
 }
-
 .gestion-item button {
-    background-color: #6c757d;
+    background-color: var(--color-uleam-gris);
     color: white;
     border: none;
     padding: 5px 10px;
@@ -188,22 +230,21 @@ h1, h2 {
     cursor: pointer;
     transition: background-color 0.3s;
 }
-
 .gestion-item button:hover {
     background-color: #5a6268;
 }
 
-/* --- Estilos de Login/Registro (vista-global) --- */
+/* --- Estilos de Login/Registro/Info (vista-global) --- */
 .vista-global {
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #0056b3;
+    background-color: var(--color-uleam-rojo);
 }
 
 .contenedor {
-    background: white;
+    background: var(--color-texto-claro);
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
@@ -213,24 +254,26 @@ h1, h2 {
 }
 
 .contenedor h2 {
-    color: #004d99;
+    color: var(--color-uleam-rojo);
     margin-bottom: 25px;
     border-bottom: none;
 }
+.contenedor h2 i {
+    margin-right: 10px;
+}
 
-.contenedor form input {
+.contenedor form input, .contenedor form select, .contenedor form textarea {
     width: 100%;
     padding: 12px;
     margin-bottom: 15px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--color-gris-borde);
     border-radius: 5px;
     box-sizing: border-box;
 }
-
 .contenedor form button {
     width: 100%;
-    background-color: #0056b3;
-    color: white;
+    background-color: var(--color-uleam-gris);
+    color: var(--color-texto-claro);
     padding: 12px;
     border: none;
     border-radius: 5px;
@@ -238,22 +281,19 @@ h1, h2 {
     font-size: 1.1em;
     transition: background-color 0.3s;
 }
-
 .contenedor form button:hover {
-    background-color: #003d7a;
+    background-color: #4a4a4a;
 }
 
 .enlace p {
     margin-top: 20px;
     font-size: 0.9em;
 }
-
 .enlace a {
-    color: #0056b3;
+    color: var(--color-uleam-rojo);
     text-decoration: none;
     font-weight: bold;
 }
-
 .enlace a:hover {
     text-decoration: underline;
 }
@@ -261,17 +301,15 @@ h1, h2 {
 /* Mensajes de Error y Validación */
 .mensaje-error {
     display: block;
-    color: #dc3545; /* Rojo de error */
+    color: var(--color-uleam-rojo);
     font-size: 0.85em;
     margin-top: -10px;
     margin-bottom: 10px;
     text-align: left;
 }
-
 .valido {
-    border-color: #28a745 !important;
+    border: 2px solid #28a745 !important;
 }
-
 .invalido {
-    border-color: #dc3545 !important;
+    border: 2px solid var(--color-uleam-rojo) !important;
 }

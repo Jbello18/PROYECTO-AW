@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /** Aplica/remueve el estilo de foco. */
     window.inputFoco = function(elemento) {
-        elemento.style.borderColor = "#3366cc";
+        elemento.style.borderColor = "#004B8D"; /* Color ULEAM */
     }
     window.inputFuera = function(elemento) {
         elemento.style.borderColor = "#ccc";
@@ -126,8 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const clave = getEl('login-clave').value;
             
             if (validarLogin(usuario, clave)) { 
-                alert("Inicio de sesión correcto. ¡Bienvenido!");
-                // REDIRECCIÓN CLAVE: De Login (index.html) a la App Principal
+                alert("Inicio de sesión correcto. ¡Bienvenido a Eventos ULEAM!");
                 window.location.href = "app.html"; 
             }
         });
@@ -147,13 +146,35 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             if (validarFormulario()) { 
                 alert('Registro exitoso. Serás redirigido a iniciar sesión.');
-                // REDIRECCIÓN CLAVE: De Registro a Login (index.html)
+                // CORRECCIÓN: Redirigir a index.html (que es la página de login)
                 window.location.href = "index.html"; 
             } else {
                  alert('Por favor, corrige los errores en el formulario.');
             }
         });
     }
+
+    // --- Lógica para info.html (NUEVA INTERFACE 4) ---
+    const formInfo = getEl('form-info');
+    if (formInfo) {
+        formInfo.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const nombre = getEl('info-nombre').value;
+            const tipo = getEl('info-tipo').value;
+            
+            if (nombre.trim() === '' || tipo === '') {
+                alert('Por favor, complete al menos el nombre y el tipo.');
+                return;
+            }
+            
+            alert(`Información registrada (Tipo: ${tipo}, Nombre: ${nombre}).`);
+            // Simulación de guardado (no hay BD)
+            formInfo.reset();
+            // Opcional: Redirigir de vuelta a la app
+            // window.location.href = "app.html";
+        });
+    }
+
 
     // --- Lógica para app.html (Gestor de Eventos) ---
     const appPrincipal = getEl('app-principal');
@@ -165,18 +186,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const gestionContainer = getEl('eventos-gestion-container');
         const vistasApp = document.querySelectorAll('#app-principal .vista');
 
-        // Base de Datos Mock (Eventos)
-        // (Datos de ejemplo)
+        // Base de Datos Mock (Eventos ULEAM)
         let eventos = [
-            { id: 1, titulo: "Introducción a React", fecha: "2025-12-10T09:00", descripcion: "Seminario sobre los fundamentos de la librería React para UIs.", cupo: 100, registrados: 15, lugar: "Aula Magna" },
-            { id: 2, titulo: "Taller de CSS Avanzado", fecha: "2025-12-15T14:30", descripcion: "Aprende Flexbox, Grid y animaciones modernas en CSS.", cupo: 50, registrados: 45, lugar: "Laboratorio B" }
+            { id: 1, titulo: "Jornadas de Investigación en Ciencias de la Educación", fecha: "2025-11-20T09:00", descripcion: "La Facultad de Ciencias de la Educación presenta sus avances en investigación.", cupo: 150, registrados: 45, lugar: "Fac. Ciencias de la Educación" },
+            { id: 2, titulo: "II Jornadas Científicas Estudiantiles (Pedernales)", fecha: "2025-11-25T10:00", descripcion: "Presentación de proyectos estudiantiles del Campus Pedernales.", cupo: 80, registrados: 78, lugar: "Campus Pedernales" },
+            { id: 3, titulo: "Taller de Análisis Curricular", fecha: "2025-12-01T14:00", descripcion: "Organizado por la Facultad de Trabajo Social para la revisión de la malla.", cupo: 40, registrados: 10, lugar: "Fac. Trabajo Social" },
+            { id: 4, titulo: "Conferencia: Prevención de Riesgos Naturales", fecha: "2025-12-05T11:00", descripcion: "Evento del Club Ecológico y la carrera de Turismo.", cupo: 200, registrados: 190, lugar: "Paraninfo" },
+            { id: 5, titulo: "I Jornada Científica de Laboratorio Clínico", fecha: "2025-12-10T08:30", descripcion: "Ciencia, ética y excelencia al servicio de la salud.", cupo: 100, registrados: 30, lugar: "Fac. Ciencias de la Salud" }
         ];
-        let misEventos = [eventos[0]];
+        let misEventos = [eventos[0], eventos[2]]; // Simula que el usuario creó estos
 
 
         // --- FUNCIONES DE LA APP ---
         
-        // Hacemos que la función sea global para que funcione en el onclick del H1
         window.mostrarVistaApp = function(idVista) {
             vistasApp.forEach(vista => {
                 if (vista.id === idVista) {
@@ -208,7 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p>${evento.descripcion}</p>
                     <p class="cupo-info">Cupo: ${evento.registrados}/${evento.cupo}</p>
                     <button class="btn-registro" data-id="${evento.id}" ${evento.registrados >= evento.cupo ? 'disabled' : ''}>
-                        ${evento.registrados >= evento.cupo ? 'Agotado' : 'Registrarse'}
+                        <i class="fas fa-check-circle"></i> ${evento.registrados >= evento.cupo ? 'Agotado' : 'Registrarse'}
                     </button>
                 `;
                 eventosContainer.appendChild(tarjeta);
@@ -274,7 +296,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 };
                 
                 eventos.push(nuevoEvento);
-                misEventos.push(nuevoEvento);
+                misEventos.push(nuevoEvento); // Añade el nuevo evento a "mis eventos"
                 formularioEvento.reset();
                 alert(`Evento "${nuevoEvento.titulo}" creado y publicado.`);
                 mostrarVistaApp('lista-eventos');

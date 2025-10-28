@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Información - Eventos ULEAM</title>
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+
+    <div id="vista-info" class="vista-global">
+        <div class="contenedor">
+
+            <div class="logo-container">
+                <img src="./logo-uleam.png" alt="Logo ULEAM" class="logo-img">
+            </div>
+
+            <h2><i class="fas fa-address-book"></i> Registro de Información</h2>
+            <p style="text-align: center; margin-top: -15px; margin-bottom: 20px; font-size: 0.9em;">Registre Ponentes, Proveedores o Clientes</p>
+            
+            <form id="form-info">
+                <input type="text" id="info-nombre" placeholder="Nombre / Razón Social" onfocus="inputFoco(this)" onblur="inputFuera(this)" required>
+                
+                <select id="info-tipo" required>
+                    <option value="" disabled selected>Seleccione el tipo</option>
+                    <option value="ponente">Ponente</option>
+                    <option value="proveedor">Proveedor</option>
+                    <option value="cliente">Cliente</option>
+                </select>
+                
+                <input type="email" id="info-email" placeholder="Email de contacto" onfocus="inputFoco(this)" onblur="inputFuera(this)">
+                
+                <textarea id="info-descripcion" placeholder="Descripción o servicio..." onfocus="inputFoco(this)" onblur="inputFuera(this)" style="min-height: 80px;"></textarea>
+                
+                <button type="submit">Guardar Información</button>
+            </form>
+            
+            <div class="enlace">
+                <p><a href="app.html">Volver a la aplicación principal</a></p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

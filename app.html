@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestor de Eventos Académicos - Principal</title>
+    <title>Gestor de Eventos ULEAM</title>
     
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -12,7 +12,9 @@
     <div id="app-principal" style="display: block;"> 
         
         <header class="header">
-            <h1 onclick="mostrarVistaApp('lista-eventos')">🎓 Eventos Académicos</h1>
+            <h1 onclick="mostrarVistaApp('lista-eventos')">
+                <img src="./logo-uleam.png" alt="Logo ULEAM" class="logo-img">
+            </h1>
             <nav class="nav">
                 <button id="btn-lista-eventos"><i class="fas fa-list"></i> Ver Eventos</button>
                 <button id="btn-crear-evento"><i class="fas fa-plus-circle"></i> Crear Evento</button>
@@ -24,41 +26,30 @@
         </header>
 
         <main class="main-container">
-
             <section id="lista-eventos" class="vista activa">
                 <h2>Próximos Seminarios y Conferencias</h2>
-                <div id="eventos-container" class="grid-eventos">
-                    </div>
+                <div id="eventos-container" class="grid-eventos"></div>
             </section>
-
             <section id="crear-evento" class="vista">
                 <h2>🖊️ Nuevo Evento Académico</h2>
                 <form id="formulario-evento">
                     <label for="titulo">Título</label>
                     <input type="text" id="titulo" required>
-
                     <label for="fecha">Fecha y Hora</label>
                     <input type="datetime-local" id="fecha" required>
-
                     <label for="descripcion">Descripción del evento</label>
                     <textarea id="descripcion" required></textarea>
-
                     <label for="cupo">Cupo Máximo</label>
                     <input type="number" id="cupo" min="1" value="50" required>
-
                     <button type="submit">Publicar Evento</button>
                 </form>
             </section>
-
             <section id="gestion-eventos" class="vista">
                 <h2>⚙️ Gestión de Eventos Creados</h2>
-                <div id="eventos-gestion-container">
-                    </div>
+                <div id="eventos-gestion-container"></div>
             </section>
-
         </main>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
