@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Información - Eventos ULEAM</title>
+    <title>Registro de Información - ULEAM</title>
     
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -14,15 +14,15 @@
         <div class="contenedor">
 
             <div class="logo-container">
-                <img src="logo-uleam.png" alt="Logo ULEAM" class="login-logo-img">
+                <img src="logo-uleam.png" alt="Logo ULEAM" class="login-logo-img" onerror="this.onerror=null; this.src='https://placehold.co/170x100/A91A1E/ffffff?text=ULEAM';">
             </div>
 
             <h2 id="titulo-registro"><i class="fas fa-address-book"></i> Registro de Información</h2>
 
-            <p class="descripcion-form">Registre Ponentes, Proveedores o Clientes</p>
+            <p class="descripcion-form">Registre Ponentes, Proveedores o Clientes para el sistema.</p>
 
             <form id="form-info">
-                <input type="text" id="info-nombre" placeholder="Nombre / Razón Social" onfocus="inputFoco(this)" onblur="inputFuera(this)" required>
+                <input type="text" id="info-nombre" placeholder="Nombre / Razón Social" required>
 
                 <select id="info-tipo" required>
                     <option value="" disabled selected>Seleccione el tipo</option>
@@ -31,11 +31,11 @@
                     <option value="cliente">Cliente</option>
                 </select>
 
-                <input type="email" id="info-email" placeholder="Email de contacto" onfocus="inputFoco(this)" onblur="inputFuera(this)">
+                <input type="email" id="info-email" placeholder="Email de contacto (Opcional)">
 
-                <textarea id="info-descripcion" placeholder="Descripción o servicio..." onfocus="inputFoco(this)" onblur="inputFuera(this)"></textarea>
+                <textarea id="info-descripcion" placeholder="Descripción, especialidad o servicio..." required></textarea>
 
-                <button type="submit" class="submit-btn">Guardar Información</button>
+                <button type="submit" class="submit-btn"><i class="fas fa-save"></i> Guardar Información</button>
             </form>
             <div class="enlace">
                 <p><a href="app.html">Volver a la aplicación principal</a></p>

@@ -3,69 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eventos Académicos - ULEAM</title>
+    <title>Eventos ULEAM - Aplicación</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> 
 </head>
 <body>
-    <div id="app-principal" style="display: block;"> 
 
-        <header class="header">
-                        <h1 onclick="mostrarVistaApp('lista-eventos')">
-                Eventos Académicos
-             </h1>
-            <nav class="nav">
-                <button id="btn-crear-evento"><i class="fas fa-plus-circle"></i> Crear Evento</button>
-                <button id="btn-mis-eventos"><i class="fas fa-cog"></i> Mis Eventos</button> 
-                <a href="info.html" id="link-a-info"><i class="fas fa-info-circle"></i> Registrar Info</a> 
-                <a href="#" id="link-logout"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
-            </nav>
-        </header>
-
-        <main class="main-container">
-
-            <section id="lista-eventos" class="vista activa">
-                <h2>Próximos Seminarios y Conferencias</h2>
-                <div id="eventos-container" class="grid-eventos">
-                    </div>
-            </section>
-
-            <section id="crear-evento" class="vista">
-                <h2><i class="fas fa-pencil-alt"></i> Nuevo Evento Académico</h2>
-                <form id="formulario-evento">
-                    <div class="form-group">
-                        <label for="titulo">Título</label>
-                        <input type="text" id="titulo" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="fecha">Fecha y Hora</label>
-                        <input type="datetime-local" id="fecha" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="lugar">Lugar</label>
-                        <input type="text" id="lugar" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="descripcion">Descripción del evento</label>
-                        <textarea id="descripcion" rows="4" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="cupo">Cupo Máximo</label>
-                        <input type="number" id="cupo" value="50" min="10" required>
-                    </div>
-                    <button type="submit" class="btn-primary"><i class="fas fa-bullhorn"></i> Publicar Evento</button>
-                </form>
-            </section>
-
-            <section id="gestion-eventos" class="vista">
-                <h2><i class="fas fa-cogs"></i> Gestión de Eventos Creados</h2>
-                <div id="eventos-gestion-container" class="gestion-list">
-                    </div>
-            </section>
-
-        </main>
+    <div class="header">
+        <div class="header-left">
+            <img src="logo-uleam.png" alt="Logo ULEAM" class="logo-img" onerror="this.onerror=null; this.src='https://placehold.co/170x45/6B6A69/ffffff?text=ULEAM';">
+            <h1>Gestor de Eventos ULEAM</h1>
+        </div>
+        <div class="nav">
+            <a href="#" id="btn-lista-eventos"><i class="fas fa-calendar-alt"></i> Lista de Eventos</a>
+            <a href="#" id="btn-crear-evento" style="display: none;"><i class="fas fa-plus-circle"></i> Crear Evento</a>
+            <a href="#" id="btn-mis-eventos" style="display: none;"><i class="fas fa-tasks"></i> Gestión Admin</a>
+            <a href="info.html" id="link-a-info"><i class="fas fa-address-book"></i> Info Adicional</a>
+            <button id="link-logout"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</button>
+        </div>
     </div>
-    <script src="script.js"></script> 
+
+    <main id="app-principal" class="main-container">
+
+        <section id="lista-eventos" class="vista activa">
+            <h2><i class="fas fa-list-ul"></i> Próximos Eventos</h2>
+            <p>Regístrate en los eventos que te interesen. El cupo es limitado.</p>
+            <div id="eventos-container" class="grid-eventos">
+                </div>
+        </section>
+
+        <section id="crear-evento" class="vista">
+            <h2><i class="fas fa-calendar-plus"></i> Crear Nuevo Evento</h2>
+            <form id="formulario-evento">
+                <label for="titulo">Título del Evento</label>
+                <input type="text" id="titulo" required>
+
+                <label for="fecha">Fecha y Hora</label>
+                <input type="datetime-local" id="fecha" required>
+                
+                <label for="lugar">Lugar</label>
+                <input type="text" id="lugar" placeholder="Ej: Auditorio de Comunicación" required>
+
+                <label for="cupo">Cupo Máximo</label>
+                <input type="number" id="cupo" min="1" required>
+
+                <label for="descripcion">Descripción Detallada</label>
+                <textarea id="descripcion" required></textarea>
+
+                <button type="submit">Guardar Evento</button>
+            </form>
+        </section>
+
+        <section id="gestion-eventos" class="vista">
+            <h2><i class="fas fa-clipboard-list"></i> Gestión de Eventos Creados</h2>
+            <div id="eventos-gestion-container">
+                </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
 </body>
-</html>
 </html>

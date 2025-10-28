@@ -3,33 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar Sesión - Eventos ULEAM</title>
-    <link rel="stylesheet" href="style.css"> 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Login - Eventos ULEAM</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> 
 </head>
 <body>
-
     <div class="vista-global">
         <div class="contenedor">
-
-            <img src="logo-uleam.png" alt="Logo ULEAM" class="login-logo-img"> 
+            <img src="logo-uleam.png" alt="Logo ULEAM" class="login-logo-img" onerror="this.onerror=null; this.src='https://placehold.co/170x100/A91A1E/ffffff?text=ULEAM';">
             
-            <h2><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</h2>
+            <h2 id="titulo-login"><i class="fas fa-lock"></i> Iniciar Sesión</h2>
+            <p class="descripcion-form">Ingresa tu correo y contraseña para acceder a los eventos. (Admin: admin@eventos.com/12345678)</p>
 
-            <form id="form-login">
-                <div class="form-group">
-                    <input type="text" id="login-usuario" placeholder="Correo electrónico o usuario" required>
-                </div>
-                <div class="form-group">
-                    <input type="password" id="login-clave" placeholder="Contraseña" required>
-                </div>
-                <button type="submit" class="btn-entrar">Entrar</button>
+            <form id="login-form">
+                <input type="email" id="email" placeholder="Correo Electrónico" required>
+                <input type="password" id="password" placeholder="Contraseña" required>
+
+                <button type="submit" class="btn-entrar"><i class="fas fa-sign-in-alt"></i> Ingresar</button>
             </form>
-
-            <p class="registro-link">¿No tienes cuenta? <a href="registro.html">Regístrate aquí</a></p>
+            
+            <button onclick="irARegistro()" class="btn-secondary"><i class="fas fa-user-plus"></i> Registrarse</button>
         </div>
     </div>
 
-    <script src="script.js"></script> 
+    <script>
+        function irARegistro() {
+            window.location.href = "registro.html";
+        }
+    </script>
+    <script src="script.js"></script>
 </body>
 </html>

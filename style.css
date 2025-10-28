@@ -1,4 +1,4 @@
-/* style.css (Versión Final con Logo Fijo, Centrado y Botón de Registro Corregido) */
+/* Estilos CSS Globales de la Aplicación ULEAM (Version de Saneamiento) */
 
 :root {
     --color-uleam-rojo: #A91A1E;
@@ -26,7 +26,7 @@ h1, h2 {
     padding-bottom: 10px;
 }
 
-/* --- Estilos de Navegación/Header --- */
+/* --- Estilos de Navegación/Header (Para app.html) --- */
 .header {
     background-color: var(--color-uleam-gris);
     color: var(--color-texto-claro);
@@ -117,7 +117,7 @@ h1, h2 {
     border-color: #8ab03b;
 }
 
-/* --- Contenedor Principal --- */
+/* --- Contenedor Principal (Para app.html) --- */
 .main-container {
     padding: 20px 30px;
 }
@@ -130,7 +130,7 @@ h1, h2 {
     display: block;
 }
 
-/* --- Formularios de Login / Registro / Info --- */
+/* --- Formularios de Login / Registro / Info (index.html & registro.html) --- */
 .vista-global {
     min-height: 100vh;
     display: flex;
@@ -157,9 +157,9 @@ h1, h2 {
 .logo-img {
     display: block;
     margin: 15px auto 20px auto; /* Centrado */
-    width: 170px;                /* Tamaño fijo */
+    width: 170px; /* Tamaño fijo */
     height: auto;
-    object-fit: contain;
+    object-fit: after contain;
 }
 
 /* 🛑 Títulos de formularios */
@@ -231,6 +231,8 @@ h1, h2 {
 }
 
 /* --- Botones --- */
+
+/* 1. Botón Primario de Formulario (Login / Submit - ULEAM Gris) */
 .btn-entrar {
     width: 100%;
     background-color: var(--color-uleam-gris);
@@ -243,7 +245,7 @@ h1, h2 {
     font-weight: bold;
     letter-spacing: 0.5px;
     transition: background-color 0.3s, transform 0.1s;
-    margin-top: 0px;
+    margin-top: 15px; 
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -252,7 +254,30 @@ h1, h2 {
     transform: translateY(-2px);
 }
 
-/* Botón Guardar Información */
+/* 2. Botón Secundario de Formulario (Navegación / Enlace - ULEAM Rojo Outlined) */
+.btn-secondary {
+    width: 100%;
+    background-color: transparent;
+    color: var(--color-uleam-rojo);
+    padding: 10px;
+    border: 2px solid var(--color-uleam-rojo);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    margin-top: 10px; /* Separación pequeña del botón primario */
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-uleam-rojo);
+    color: var(--color-texto-claro);
+    border-color: var(--color-uleam-rojo);
+    transform: translateY(-1px);
+}
+
+
+/* 3. Botón Guardar Información (Formulario de Información) */
 .submit-btn {
     width: 100%;
     background-color: var(--color-uleam-rojo);
@@ -274,7 +299,7 @@ h1, h2 {
     transform: translateY(-1px);
 }
 
-/* --- 🌟 BOTÓN BONITO DE REGISTRO (Registro.html) --- */
+/* 4. 🌟 BOTÓN PRINCIPAL DE REGISTRO (Registro.html) - Usando Gradiente */
 #btnRegistrar {
     width: 100%;
     background: linear-gradient(135deg, #A91A1E 0%, #C92B2E 100%);
