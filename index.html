@@ -4,28 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión - Eventos ULEAM</title>
-    
     <link rel="stylesheet" href="style.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
 
-    <div id="vista-login" class="vista-global">
+    <div class="vista-global">
         <div class="contenedor">
-            
-            <div class="logo-container">
-                <img src="./logo-uleam.png" alt="Logo ULEAM" class="logo-img">
-            </div>
 
+            <img src="logo-uleam.png" alt="Logo ULEAM" class="login-logo-img"> 
+            
             <h2><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</h2>
+
             <form id="form-login">
-                <input type="text" id="login-usuario" placeholder="Correo electrónico o usuario" onfocus="inputFoco(this)" onblur="inputFuera(this)" required>
-                <input type="password" id="login-clave" placeholder="Contraseña" onfocus="inputFoco(this)" onblur="inputFuera(this)" required>
-                <button type="submit">Entrar</button>
+                <div class="form-group">
+                    <input type="text" id="login-usuario" placeholder="Correo electrónico o usuario" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="login-clave" placeholder="Contraseña" required>
+                </div>
+                <button type="submit" class="btn-entrar">Entrar</button>
             </form>
-            <div class="enlace">
-                <p>¿No tienes cuenta? <a href="registro.html">Regístrate aquí</a></p>
-            </div>
+
+            <p class="registro-link">¿No tienes cuenta? <a href="registro.html">Regístrate aquí</a></p>
         </div>
     </div>
 

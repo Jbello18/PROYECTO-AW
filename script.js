@@ -1,3 +1,5 @@
+// script.js (VERSIÓN FINAL Y COMPLETA - CORREGIDA)
+
 document.addEventListener('DOMContentLoaded', () => {
 
     /* ========================================================= */
@@ -6,18 +8,23 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const getEl = (id) => document.getElementById(id);
     
-    // Usuarios iniciales (SI se mantienen persistentes para no registrarse cada vez)
+    // Usuarios iniciales
     const usuariosIniciales = [
         { email: 'admin@eventos.com', clave: '12345678', nombre: 'Admin Master', rol: 'admin' },
         { email: 'usuario@eventos.com', clave: 'password8', nombre: 'Juan User', rol: 'usuario' },
     ];
     
-    // Usuarios: Se carga o se inicializa
     let usuariosRegistrados = JSON.parse(localStorage.getItem('usuarios')) || usuariosIniciales; 
     localStorage.setItem('usuarios', JSON.stringify(usuariosRegistrados));
 
-    /* --- Base de Datos Mock (Eventos POR DEFECTO - ¡MODIFICABLE!) --- */
-    // 🔥🔥 ESTA ES LA LISTA QUE PUEDE MODIFICAR Y SE REFLEJARÁ AL RECARGAR 🔥🔥
+    // Base de Datos Mock (Información Adicional - NUEVO)
+    let infoAdicional = JSON.parse(localStorage.getItem('infoAdicional')) || [];
+    function guardarInfoAdicional() {
+        localStorage.setItem('infoAdicional', JSON.stringify(infoAdicional));
+    }
+
+
+    /* --- Base de Datos Mock (Eventos POR DEFECTO) --- */
     const eventosPorDefecto = [
         { id: 1, titulo: "Ceremonia de Elección de Reina", fecha: "2025-10-28T18:00", descripcion: "Organizador: AFU-Asociación femenina Universitaria.", cupo: 200, registrados: 0, lugar: "Uleam - Plaza Centenario" }, 
         { id: 2, titulo: "Sesión conmemorativa (primer año)", fecha: "2025-10-29T10:00", descripcion: "Organiza: Instituto de neurociencias.", cupo: 150, registrados: 0, lugar: "Auditorio de comunicación" },
@@ -27,24 +34,11 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: 6, titulo: "Inauguración de campeonato interfacultades", fecha: "2025-11-07T10:00", descripcion: "Organiza: LDU - Liga Deportiva Universitaria.", cupo: 100, registrados: 44, lugar: "Uleam - Estadio" },
     ];
 
-    // -------------------------------------------------------------------
-    // 🔥 INICIALIZACIÓN SIN PERSISTENCIA DE EVENTOS
-    // -------------------------------------------------------------------
-    
-    // Las listas SIEMPRE serán las de eventosPorDefecto al recargar.
-    // Se usa el spread (...) para hacer una COPIA que puede modificarse
-    // en la sesión actual, pero se reiniciará al recargar.
     let eventos = [...eventosPorDefecto];
     let misEventos = [...eventosPorDefecto];
 
-    // La función guardarEventos() ahora solo existe de forma simbólica, ya que los datos de evento
-    // se sobrescriben al recargar.
-    function guardarEventos() {
-        // En este modo, no tiene sentido guardar en localStorage si siempre reiniciaremos
-        // la lista desde el código. Para evitar errores, simplemente se mantiene
-        // la función, pero no hace nada que persista.
-    }
-    
+    function guardarEventos() {} 
+
     /* ========================================================= */
     /* ===== 2. FUNCIONES GLOBALES DE UTILIDAD Y VALIDACIÓN ===== */
     /* ========================================================= */
@@ -60,7 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return true; 
     }
     
-    // Helper para mostrar error y actualizar clase
     function mostrarError(elemento, mensaje, checkValido) {
         const errorEl = getEl(`error${elemento.id.charAt(0).toUpperCase() + elemento.id.slice(1)}`);
         
@@ -71,10 +64,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (errorEl) errorEl.textContent = mensaje;
         if (elemento) {
-            elemento.className = valido ? 'valido' : 'invalido';
-            elemento.style.borderColor = valido ? "#28a745" : "red";
+            if (typeof checkValido !== 'undefined') {
+                 elemento.classList.remove('valido', 'invalido');
+                 elemento.classList.add(valido ? 'valido' : 'invalido');
+                 elemento.style.borderColor = valido ? "#28a745" : "red";
+            }
         }
-
         return valido;
     }
 
@@ -97,7 +92,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return mostrarError(celular, valido ? '' : 'Debe tener 10 dígitos.', valido);
     }
     
-    // VALIDACIÓN DE EMAIL: Verifica formato Y duplicados
     function validarEmail() {
         const email = getEl('email');
         const formatoCorreo = /\S+@\S+\.\S+/;
@@ -106,8 +100,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (emailValue === '') return mostrarError(email, 'El correo es obligatorio.', false);
         if (!formatoCorreo.test(emailValue)) return mostrarError(email, 'Formato de correo inválido.', false);
         
-        // Verifica si el correo ya está registrado en la lista global
-        if (usuariosRegistrados.some(u => u.email === emailValue)) {
+        const isEditing = getEl('registroForm')?.dataset.editing === 'true';
+
+        if (!isEditing && usuariosRegistrados.some(u => u.email === emailValue)) {
             return mostrarError(email, 'Correo ya registrado.', false);
         }
         
@@ -133,7 +128,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     function validarFormulario() { 
-        // Ejecutar todas las validaciones para mostrar todos los errores
         const v1 = validarNombre();
         const v2 = validarApellido();
         const v3 = validarCelular();
@@ -162,7 +156,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (usuarioEncontrado) {
                 alert(`Inicio de sesión correcto. ¡Bienvenido ${usuarioEncontrado.nombre} (${usuarioEncontrado.rol})!`);
-                // Guardar sesión
                 localStorage.setItem('userRole', usuarioEncontrado.rol);
                 localStorage.setItem('userName', usuarioEncontrado.nombre);
                 window.location.href = "app.html"; 
@@ -202,9 +195,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Lógica para info.html (NUEVA INTERFACE 4) ---
+    // --- Lógica para info.html (Registro de Información Adicional) ---
     const formInfo = getEl('form-info');
     if (formInfo) {
+        
+        // ❌ CÓDIGO ELIMINADO: La restricción que redirigía al administrador.
+        /* const userRole = localStorage.getItem('userRole');
+        if (userRole === 'admin') {
+            alert('El administrador ya es dueño y no necesita registrar información adicional.');
+            window.location.href = "app.html"; 
+            return; // Detiene la ejecución del script en info.html para el admin
+        }
+        */
+        
         formInfo.addEventListener('submit', (e) => {
             e.preventDefault();
             const nombre = getEl('info-nombre').value;
@@ -215,11 +218,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
             
+            // Creación del objeto de información
+            const nuevaInfo = {
+                id: Date.now(),
+                nombre: nombre,
+                tipo: tipo,
+                email: getEl('info-email').value || 'N/A',
+                descripcion: getEl('info-descripcion').value || 'N/A',
+                registradoPor: localStorage.getItem('userName') || 'Admin' 
+            };
+
+            // Guarda la nueva información y actualiza localStorage
+            infoAdicional.push(nuevaInfo);
+            guardarInfoAdicional(); 
+            
             alert(`Información registrada (Tipo: ${tipo}, Nombre: ${nombre}).`);
-            // Simulación de guardado (no hay BD)
             formInfo.reset();
-            // Opcional: Redirigir de vuelta a la app
-            // window.location.href = "app.html";
+            window.location.href = "app.html";
         });
     }
 
@@ -228,7 +243,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const appPrincipal = getEl('app-principal');
     if (appPrincipal) { 
 
-        // CONTROL DE ACCESO y VISIBILIDAD POR ROL
         const userRole = localStorage.getItem('userRole');
         const userName = localStorage.getItem('userName');
         
@@ -237,32 +251,43 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = "index.html"; 
             return; 
         }
-        
-        if (userRole !== 'admin') {
-            getEl('btn-crear-evento').style.display = 'none';
-            getEl('btn-mis-eventos').style.display = 'none';
-        }
-        
-        const headerTitle = document.querySelector('.header h1');
-        if (headerTitle) {
-             headerTitle.textContent = `🎓 Eventos Académicos (${userName} - ${userRole === 'admin' ? 'Admin' : 'Usuario'})`;
-        }
-        
-        // --- REFERENCIAS A VISTAS ---
+
         const eventosContainer = getEl('eventos-container');
         const formularioEvento = getEl('formulario-evento');
         const gestionContainer = getEl('eventos-gestion-container');
         const vistasApp = document.querySelectorAll('#app-principal .vista');
+        
+        const linkCrearEvento = getEl('btn-crear-evento'); 
+        const linkMisEventos = getEl('btn-mis-eventos'); 
+        const linkRegistrarInfo = getEl('link-a-info'); // Enlace de la barra de navegación (Header)
+
+        
+        function setMenuVisibility(role) {
+            // Visibilidad de Herramientas de Gestión (Botones Admin)
+            if (linkCrearEvento) linkCrearEvento.style.display = role === 'admin' ? 'inline-flex' : 'none';
+            if (linkMisEventos) linkMisEventos.style.display = role === 'admin' ? 'inline-flex' : 'none';
+            
+            // ✅ CORRECCIÓN: Ahora el botón 'Registrar Info' es visible para todos.
+            if (linkRegistrarInfo) {
+                linkRegistrarInfo.style.display = 'inline-flex'; 
+            }
+            
+            const headerTitle = document.querySelector('.header h1');
+            if (headerTitle) {
+                headerTitle.textContent = `🎓 Eventos Académicos (${userName} - ${role === 'admin' ? 'Admin' : 'Usuario'})`;
+            }
+        }
+        
+        setMenuVisibility(userRole);
 
 
-        // --- FUNCIONES DE GESTIÓN (ADMIN) ---
+        // --- FUNCIONES DE GESTIÓN DE VISTAS Y EVENTOS ---
         
         window.eliminarEvento = function(id) {
             const confirmacion = confirm("¿Estás seguro de que quieres eliminar este evento?");
             if (confirmacion) {
                 eventos = eventos.filter(e => e.id !== id);
                 misEventos = misEventos.filter(e => e.id !== id); 
-                // Ya no llamamos a guardarEventos(), solo se eliminan en la sesión actual
                 
                 alert(`Evento con ID ${id} eliminado. Este cambio se perderá al recargar.`);
                 renderizarGestionEventos(); 
@@ -282,11 +307,15 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // Renderizado de la lista de eventos
         function renderizarEventos(lista) {
             if (!eventosContainer) return;
             eventosContainer.innerHTML = '';
             
+            // Lógica para deshabilitar el botón si es ADMIN
+            const esAdmin = localStorage.getItem('userRole') === 'admin'; 
+            const botonDeshabilitadoAdmin = esAdmin ? 'disabled' : ''; 
+            const textoBotonAdmin = esAdmin ? 'Solo ver' : 'Registrarse'; 
+
              if (lista.length === 0) {
                  eventosContainer.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; color: #555;">No hay eventos disponibles para mostrar.</p>';
                  return;
@@ -296,6 +325,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 const fechaObj = new Date(evento.fecha);
                 const fechaStr = fechaObj.toLocaleDateString('es-ES', { year: 'numeric', month: '2-digit', day: '2-digit' });
                 const horaStr = fechaObj.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', hour12: true });
+
+                // Determinar el estado y texto final del botón
+                const cupoAgotado = evento.registrados >= evento.cupo;
+                // Si el cupo está agotado, se deshabilita. Si no, se usa la propiedad de deshabilitado por rol (admin)
+                const estadoFinalBoton = cupoAgotado ? 'disabled' : botonDeshabilitadoAdmin;
+                const textoFinalBoton = cupoAgotado ? 'Agotado' : (esAdmin ? textoBotonAdmin : 'Registrarse');
+                // Se añade una clase diferente si el botón está deshabilitado por admin, para estilo (ver style.css)
+                const claseFinalBoton = cupoAgotado ? 'btn-registro btn-agotado' : (esAdmin ? 'btn-registro btn-admin-view' : 'btn-registro');
 
                 const tarjeta = document.createElement('article');
                 tarjeta.className = 'tarjeta-evento';
@@ -307,8 +344,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     </p>
                     <p>${evento.descripcion}</p>
                     <p class="cupo-info">Cupo: ${evento.registrados}/${evento.cupo}</p>
-                    <button class="btn-registro" data-id="${evento.id}" ${evento.registrados >= evento.cupo ? 'disabled' : ''}>
-                        <i class="fas fa-check-circle"></i> ${evento.registrados >= evento.cupo ? 'Agotado' : 'Registrarse'}
+                    <button class="${claseFinalBoton}" data-id="${evento.id}" ${estadoFinalBoton}>
+                        <i class="fas fa-check-circle"></i> ${textoFinalBoton}
                     </button>
                 `;
                 eventosContainer.appendChild(tarjeta);
@@ -318,20 +355,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function agregarListenersRegistroAsistentes() {
             document.querySelectorAll('.btn-registro').forEach(btn => {
-                // CLONAR el nodo para evitar múltiples listeners si la lista se renderiza varias veces
                 const newButton = btn.cloneNode(true);
                 btn.parentNode.replaceChild(newButton, btn);
                 
+                // Si es admin o está deshabilitado, no añade el listener.
+                if (localStorage.getItem('userRole') === 'admin' || newButton.disabled) return; 
+
                 newButton.addEventListener('click', (e) => {
                     const eventoId = parseInt(e.currentTarget.dataset.id);
                     const evento = eventos.find(e => e.id === eventoId);
 
                     if (evento && evento.registrados < evento.cupo) {
                         evento.registrados++; 
-                        // guardarEventos(); // No es necesario si no hay persistencia
-                        
                         alert(`¡Te has registrado con éxito a "${evento.titulo}"! (El registro se perderá al recargar)`);
-                        
                         renderizarEventos(eventos); 
                     } else if (evento.registrados >= evento.cupo) {
                         alert("Lo sentimos, el cupo para este evento está agotado.");
@@ -340,7 +376,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
         
-        // Renderizado de Gestión de Eventos (Botones Admin)
         function renderizarGestionEventos() {
             if (!gestionContainer) return;
             gestionContainer.innerHTML = '';
@@ -373,7 +408,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 gestionContainer.appendChild(gestionItem);
             });
             
-            // Agregar listeners para la funcionalidad de Admin simulada
             gestionContainer.querySelectorAll('.btn-notificar').forEach(btn => {
                 btn.addEventListener('click', () => alert(`Simulación: Notificación enviada a los asistentes de: ${eventos.find(e => e.id === parseInt(btn.dataset.id)).titulo}`));
             });
@@ -386,23 +420,18 @@ document.addEventListener('DOMContentLoaded', () => {
             formularioEvento.addEventListener('submit', (e) => {
                 e.preventDefault();
 
-                // 1. Obtener valores, incluyendo el nuevo campo 'lugar'
                 const titulo = getEl('titulo').value;
                 const fecha = getEl('fecha').value;
                 const descripcion = getEl('descripcion').value;
-                
-                // Si ya añadiste <input id="lugar"> a app.html, esto lo tomará
                 const lugarInput = getEl('lugar');
                 const lugar = lugarInput ? lugarInput.value : 'Por confirmar'; 
                 const cupo = parseInt(getEl('cupo').value);
 
-                // 2. Validación
                 if (!titulo || !fecha || !descripcion || !lugar || isNaN(cupo) || cupo <= 0) {
                     alert("Por favor, completa todos los campos del evento correctamente.");
                     return; 
                 }
 
-                // 3. Crear el objeto
                 const nuevoEvento = {
                     id: Date.now(), 
                     titulo: titulo,
@@ -415,7 +444,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 eventos.push(nuevoEvento);
                 misEventos.push(nuevoEvento);
-                // guardarEventos(); // No es necesario si no hay persistencia
                 
                 formularioEvento.reset();
                 alert(`Evento "${nuevoEvento.titulo}" creado y publicado. Se perderá al recargar.`);
@@ -424,7 +452,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         // Navegación interna de la App
-        getEl('btn-lista-eventos')?.addEventListener('click', () => mostrarVistaApp('lista-eventos'));
         getEl('btn-crear-evento')?.addEventListener('click', () => mostrarVistaApp('crear-evento'));
         getEl('btn-mis-eventos')?.addEventListener('click', () => mostrarVistaApp('gestion-eventos'));
         
@@ -440,3 +467,5 @@ document.addEventListener('DOMContentLoaded', () => {
         mostrarVistaApp('lista-eventos');
     }
 });
+
+

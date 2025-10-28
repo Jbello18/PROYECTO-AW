@@ -14,35 +14,34 @@
         <div class="contenedor">
 
             <div class="logo-container">
-                <img src="./logo-uleam.png" alt="Logo ULEAM" class="logo-img">
+                <img src="logo-uleam.png" alt="Logo ULEAM" class="login-logo-img">
             </div>
 
-            <h2><i class="fas fa-address-book"></i> Registro de Información</h2>
-            <p style="text-align: center; margin-top: -15px; margin-bottom: 20px; font-size: 0.9em;">Registre Ponentes, Proveedores o Clientes</p>
-            
+            <h2 id="titulo-registro"><i class="fas fa-address-book"></i> Registro de Información</h2>
+
+            <p class="descripcion-form">Registre Ponentes, Proveedores o Clientes</p>
+
             <form id="form-info">
                 <input type="text" id="info-nombre" placeholder="Nombre / Razón Social" onfocus="inputFoco(this)" onblur="inputFuera(this)" required>
-                
+
                 <select id="info-tipo" required>
                     <option value="" disabled selected>Seleccione el tipo</option>
                     <option value="ponente">Ponente</option>
                     <option value="proveedor">Proveedor</option>
                     <option value="cliente">Cliente</option>
                 </select>
-                
+
                 <input type="email" id="info-email" placeholder="Email de contacto" onfocus="inputFoco(this)" onblur="inputFuera(this)">
-                
-                <textarea id="info-descripcion" placeholder="Descripción o servicio..." onfocus="inputFoco(this)" onblur="inputFuera(this)" style="min-height: 80px;"></textarea>
-                
-                <button type="submit">Guardar Información</button>
+
+                <textarea id="info-descripcion" placeholder="Descripción o servicio..." onfocus="inputFoco(this)" onblur="inputFuera(this)"></textarea>
+
+                <button type="submit" class="submit-btn">Guardar Información</button>
             </form>
-            
             <div class="enlace">
                 <p><a href="app.html">Volver a la aplicación principal</a></p>
             </div>
         </div>
     </div>
-    
     <script src="script.js"></script>
 </body>
 </html>

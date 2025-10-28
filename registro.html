@@ -1,51 +1,52 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Cuenta - Eventos ULEAM</title>
-    
-    <link rel="stylesheet" href="style.css">
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Crear Cuenta - Eventos ULEAM</title>
+ 
+     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
 
-    <div id="vista-registro" class="vista-global">
+     <div id="vista-registro" class="vista-global">
         <div class="contenedor">
 
-            <div class="logo-container">
-                <img src="./logo-uleam.png" alt="Logo ULEAM" class="logo-img">
+             <div class="logo-container">
+                <img src="logo-uleam.png" alt="Logo ULEAM" class="logo-img">
             </div>
 
-            <h2><i class="fas fa-user-plus"></i> Crear Cuenta</h2>
+             <h2><i class="fas fa-user-plus"></i> Crear Cuenta</h2>
             <form id="registroForm">
                 <input type="text" id="nombre" placeholder="Nombres" onfocus="inputFoco(this)" onblur="inputFuera(this)">
                 <span id="errorNombre" class="mensaje-error"></span>
-                
+
                 <input type="text" id="apellido" placeholder="Apellidos" onfocus="inputFoco(this)" onblur="inputFuera(this)">
                 <span id="errorApellido" class="mensaje-error"></span>
-                
+
                 <input type="tel" id="celular" placeholder="Celular (10 dígitos)" onfocus="inputFoco(this)" onblur="inputFuera(this)">
-                <span id="errorCelular" class="mensaje-error"></span>
-                
+                 <span id="errorCelular" class="mensaje-error"></span>
+
                 <input type="email" id="email" placeholder="Correo electrónico" onfocus="inputFoco(this)" onblur="inputFuera(this)">
-                <span id="errorEmail" class="mensaje-error"></span>
-                
+                 <span id="errorEmail" class="mensaje-error"></span>
+
                 <input type="password" id="password" placeholder="Contraseña (min. 8 car.)" onfocus="inputFoco(this)" onblur="inputFuera(this)">
                 <span id="errorPassword" class="mensaje-error"></span>
-                
+
                 <input type="password" id="confirmar" placeholder="Confirmar contraseña" onfocus="inputFoco(this)" onblur="inputFuera(this)">
                 <span id="errorConfirmar" class="mensaje-error"></span>
-                
-                <button type="submit" id="btnRegistrar">Registrarse</button>
-            </form>
-            
-            <div class="enlace">
+
+                <!-- ✅ CLASE ASIGNADA AL BOTÓN -->
+                <button type="submit" class="btn-form" id="btnRegistrar">Registrarse</button>
+             </form>
+
+            <div class="registro-link">
                 <p>¿Ya tienes cuenta? <a href="index.html">Inicia sesión</a></p>
             </div>
         </div>
     </div>
-    
+
     <script src="script.js"></script>
 </body>
 </html>

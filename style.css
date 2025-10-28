@@ -1,14 +1,14 @@
-/* style.css */
+/* style.css (Versión Final con Logo Fijo, Centrado y Botón de Registro Corregido) */
 
 :root {
-    /* Paleta ULEAM Corregida (Rojo, Gris, Verde) */
-    --color-uleam-rojo: #A91A1E; /* Rojo institucional */
-    --color-uleam-gris: #6B6A69; /* Gris institucional */
-    --color-uleam-verde: #9EC54C; /* Verde institucional del logo */
+    --color-uleam-rojo: #A91A1E;
+    --color-uleam-gris: #6B6A69;
+    --color-uleam-verde: #9EC54C;
     --color-texto-claro: #ffffff;
     --color-texto-oscuro: #333333;
     --color-fondo-suave: #f4f4f4;
     --color-gris-borde: #dddddd;
+    --color-sombra-suave: rgba(0, 0, 0, 0.15);
 }
 
 /* --- Estilos Globales --- */
@@ -26,84 +26,98 @@ h1, h2 {
     padding-bottom: 10px;
 }
 
-/* --- Estilos de Logo --- */
-.logo-container {
-    text-align: center;
-    margin-bottom: 20px;
-}
-.logo-img {
-    max-width: 250px; /* Ancho para el logo horizontal en login */
-    height: auto;
-}
-.header .logo-img {
-    /* --- AJUSTE REALIZADO AQUÍ --- */
-    height: 60px;  /* Altura fija de 60px */
-    width: auto;
-    display: block;
-    /* Añadimos un pequeño margen vertical para que no toque los bordes */
-    margin: 5px 0; 
-}
-
-/* --- Estilos de Navegación/Header (app.html) --- */
+/* --- Estilos de Navegación/Header --- */
 .header {
     background-color: var(--color-uleam-gris);
     color: var(--color-texto-claro);
-    /* --- AJUSTE REALIZADO AQUÍ --- */
-    padding: 0 30px; /* 0 padding vertical, 30px horizontal */
+    padding: 10px 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    /* La altura total será 70px (60px del logo + 10px de margen) */
+    box-shadow: 0 4px 6px var(--color-sombra-suave);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    flex-wrap: wrap;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    margin-right: 20px;
+}
+
+/* Logo en el Header */
+.header .logo-img {
+    height: 45px;
+    width: auto;
+    margin-right: 15px;
 }
 
 .header h1 {
     margin: 0;
-    padding: 0; /* Eliminamos padding del H1 */
+    padding: 0;
     color: var(--color-texto-claro);
     border-bottom: none;
+    font-size: 1.2em;
+    font-weight: 600;
     cursor: pointer;
-    font-size: 1.5em;
+}
+
+.nav {
     display: flex;
     align-items: center;
-    gap: 15px;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .nav a, .nav button {
     background: none;
-    border: none;
+    border: 2px solid transparent;
     color: var(--color-texto-claro);
-    padding: 10px 15px;
-    margin-left: 10px;
+    padding: 8px 12px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 0.95em;
     text-decoration: none;
-    border-radius: 4px;
-    transition: background-color 0.3s;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+}
+
+.nav a i, .nav button i {
+    margin-right: 5px;
 }
 
 .nav a:hover, .nav button:hover {
-    background-color: #4a4a4a;
+    background-color: rgba(255, 255, 255, 0.1);
 }
-/* Botón de logout en Rojo ULEAM */
+
 #link-logout {
     background-color: var(--color-uleam-rojo);
+    border-color: var(--color-uleam-rojo);
 }
+
 #link-logout:hover {
     background-color: #8c1619;
+    border-color: #8c1619;
 }
-/* Botón de "Registrar Info" con acento Verde */
+
 #link-a-info {
     background-color: var(--color-uleam-verde);
     color: var(--color-texto-oscuro);
     font-weight: bold;
+    border-color: var(--color-uleam-verde);
 }
+
 #link-a-info:hover {
     background-color: #8ab03b;
+    border-color: #8ab03b;
 }
 
-
-/* --- Contenedor Principal de la App --- */
+/* --- Contenedor Principal --- */
 .main-container {
     padding: 20px 30px;
 }
@@ -116,7 +130,242 @@ h1, h2 {
     display: block;
 }
 
-/* --- Formulario de Creación de Eventos --- */
+/* --- Formularios de Login / Registro / Info --- */
+.vista-global {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-uleam-rojo);
+    padding: 10px;
+    position: relative;
+}
+
+/* Contenedor del formulario */
+.contenedor {
+    background: var(--color-texto-claro);
+    padding: 15px 30px 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* 🎯 LOGOTIPO UNIFICADO Y FIJO PARA LOGIN / REGISTRO / INFO */
+.login-logo-img,
+.logo-img {
+    display: block;
+    margin: 15px auto 20px auto; /* Centrado */
+    width: 170px;                /* Tamaño fijo */
+    height: auto;
+    object-fit: contain;
+}
+
+/* 🛑 Títulos de formularios */
+.contenedor h2 {
+    color: var(--color-uleam-rojo);
+    margin-top: -20px;
+    margin-bottom: 10px;
+    border-bottom: none;
+    font-size: 1.8em;
+    text-transform: uppercase;
+}
+
+#titulo-registro {
+    font-size: 1.6em;
+    margin-top: -10px;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.contenedor > h2 {
+    text-align: center;
+}
+
+.contenedor h2 i {
+    margin-right: 10px;
+}
+
+/* --- Descripciones --- */
+.contenedor p {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 0.95em;
+    color: #666;
+}
+
+.descripcion-form {
+    text-align: center;
+    margin-top: -10px !important;
+    margin-bottom: 15px !important;
+    font-size: 0.9em;
+    color: #666;
+}
+
+/* --- Inputs / Select / Textarea --- */
+.contenedor form input,
+.contenedor form select,
+.contenedor form textarea {
+    width: 100%;
+    padding: 12px 10px;
+    margin-bottom: 10px;
+    border: 1px solid var(--color-gris-borde);
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 1em;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#form-info textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.contenedor form input:focus,
+.contenedor form select:focus,
+.contenedor form textarea:focus {
+    border-color: var(--color-uleam-rojo);
+    box-shadow: 0 0 5px rgba(169, 26, 30, 0.5);
+    outline: none;
+}
+
+/* --- Botones --- */
+.btn-entrar {
+    width: 100%;
+    background-color: var(--color-uleam-gris);
+    color: var(--color-texto-claro);
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    transition: background-color 0.3s, transform 0.1s;
+    margin-top: 0px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-entrar:hover {
+    background-color: #4a4a4a;
+    transform: translateY(-2px);
+}
+
+/* Botón Guardar Información */
+.submit-btn {
+    width: 100%;
+    background-color: var(--color-uleam-rojo);
+    color: var(--color-texto-claro);
+    padding: 12px;
+    font-size: 1.1em;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.3s, transform 0.1s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    letter-spacing: 0.5px;
+}
+
+.submit-btn:hover {
+    background-color: #8c1619;
+    transform: translateY(-1px);
+}
+
+/* --- 🌟 BOTÓN BONITO DE REGISTRO (Registro.html) --- */
+#btnRegistrar {
+    width: 100%;
+    background: linear-gradient(135deg, #A91A1E 0%, #C92B2E 100%);
+    color: var(--color-texto-claro);
+    padding: 14px 0;
+    font-size: 1.15em;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    margin-top: 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 10px rgba(169, 26, 30, 0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+#btnRegistrar:hover {
+    background: linear-gradient(135deg, #8c1619 0%, #B11F22 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 7px 14px rgba(0, 0, 0, 0.25);
+}
+
+#btnRegistrar:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+#btnRegistrar i {
+    font-size: 1.2em;
+    color: #fff;
+}
+
+@keyframes aparecerBoton {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+#btnRegistrar {
+    animation: aparecerBoton 0.4s ease-out;
+}
+
+/* Enlaces */
+.enlace {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.enlace a,
+.registro-link a {
+    color: var(--color-uleam-rojo);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s, text-decoration 0.3s;
+    font-size: 1em;
+}
+
+.enlace a:hover,
+.registro-link a:hover {
+    color: #8c1619;
+    text-decoration: underline;
+}
+
+.registro-link {
+    margin-top: 25px;
+    font-size: 0.95em;
+}
+
+/* Mensajes de error */
+.mensaje-error {
+    display: block;
+    color: var(--color-uleam-rojo);
+    font-size: 0.85em;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    text-align: left;
+    padding-left: 5px;
+}
+
+.valido {
+    border: 2px solid #28a745 !important;
+}
+
+.invalido {
+    border: 2px solid var(--color-uleam-rojo) !important;
+}
+
+/* --- Estilos de Eventos y Gestión (app.html) --- */
 #formulario-evento {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -128,13 +377,16 @@ h1, h2 {
     border-radius: 8px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
+
 #formulario-evento label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
     color: #555;
 }
-#formulario-evento input, #formulario-evento textarea {
+
+#formulario-evento input,
+#formulario-evento textarea {
     width: 100%;
     padding: 10px;
     border: 1px solid var(--color-gris-borde);
@@ -142,10 +394,12 @@ h1, h2 {
     box-sizing: border-box;
     font-size: 1em;
 }
+
 #formulario-evento textarea {
     grid-column: 1 / -1;
     min-height: 100px;
 }
+
 #formulario-evento button[type="submit"] {
     grid-column: 1 / -1;
     background-color: var(--color-uleam-rojo);
@@ -157,38 +411,53 @@ h1, h2 {
     font-size: 1.1em;
     transition: background-color 0.3s;
 }
+
 #formulario-evento button[type="submit"]:hover {
     background-color: #8c1619;
 }
 
-/* --- Estilos de Tarjetas de Eventos --- */
 .grid-eventos {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 25px;
     margin-top: 20px;
 }
+
 .tarjeta-evento {
     background: var(--color-texto-claro);
-    padding: 20px;
+    padding: 15px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-left: 5px solid var(--color-uleam-rojo);
     transition: transform 0.2s;
 }
+
+.tarjeta-evento h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.tarjeta-evento p {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
 .tarjeta-evento:hover {
     transform: translateY(-5px);
 }
+
 .meta-evento i {
     margin-right: 5px;
     color: var(--color-uleam-rojo);
 }
+
 .cupo-info {
     font-size: 0.9em;
     color: #888;
     margin-top: 10px;
+    margin-bottom: 10px;
 }
-/* Botón de registro con acento Verde */
+
 .btn-registro {
     background-color: var(--color-uleam-verde);
     color: var(--color-texto-oscuro);
@@ -196,20 +465,32 @@ h1, h2 {
     padding: 8px 15px;
     border-radius: 4px;
     cursor: pointer;
-    margin-top: 10px;
+    margin-top: 0;
     font-weight: bold;
+    display: inline-flex;
+    align-items: center;
 }
+
+.btn-registro i {
+    margin-right: 5px;
+}
+
 .btn-registro:hover {
     background-color: #8ab03b;
 }
-.btn-registro:disabled {
-    background-color: #ccc;
-    color: #777;
-    cursor: not-allowed;
+
+.btn-agotado {
+    background-color: #ccc !important;
+    color: #777 !important;
+    cursor: not-allowed !important;
 }
 
+.btn-admin-view {
+    background-color: var(--color-uleam-gris) !important;
+    color: var(--color-texto-claro) !important;
+    cursor: not-allowed !important;
+}
 
-/* --- Estilos de Gestión (Mis Eventos) --- */
 .gestion-item {
     background: var(--color-texto-claro);
     padding: 15px;
@@ -220,6 +501,7 @@ h1, h2 {
     align-items: center;
     border-left: 4px solid var(--color-uleam-gris);
 }
+
 .gestion-item button {
     background-color: var(--color-uleam-gris);
     color: white;
@@ -230,86 +512,7 @@ h1, h2 {
     cursor: pointer;
     transition: background-color 0.3s;
 }
+
 .gestion-item button:hover {
     background-color: #5a6268;
-}
-
-/* --- Estilos de Login/Registro/Info (vista-global) --- */
-.vista-global {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--color-uleam-rojo);
-}
-
-.contenedor {
-    background: var(--color-texto-claro);
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
-}
-
-.contenedor h2 {
-    color: var(--color-uleam-rojo);
-    margin-bottom: 25px;
-    border-bottom: none;
-}
-.contenedor h2 i {
-    margin-right: 10px;
-}
-
-.contenedor form input, .contenedor form select, .contenedor form textarea {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 15px;
-    border: 1px solid var(--color-gris-borde);
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-.contenedor form button {
-    width: 100%;
-    background-color: var(--color-uleam-gris);
-    color: var(--color-texto-claro);
-    padding: 12px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1.1em;
-    transition: background-color 0.3s;
-}
-.contenedor form button:hover {
-    background-color: #4a4a4a;
-}
-
-.enlace p {
-    margin-top: 20px;
-    font-size: 0.9em;
-}
-.enlace a {
-    color: var(--color-uleam-rojo);
-    text-decoration: none;
-    font-weight: bold;
-}
-.enlace a:hover {
-    text-decoration: underline;
-}
-
-/* Mensajes de Error y Validación */
-.mensaje-error {
-    display: block;
-    color: var(--color-uleam-rojo);
-    font-size: 0.85em;
-    margin-top: -10px;
-    margin-bottom: 10px;
-    text-align: left;
-}
-.valido {
-    border: 2px solid #28a745 !important;
-}
-.invalido {
-    border: 2px solid var(--color-uleam-rojo) !important;
 }
