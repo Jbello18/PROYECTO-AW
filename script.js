@@ -37,15 +37,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let eventos = [...eventosPorDefecto];
     let misEventos = [...eventosPorDefecto];
 
-    // La función guardarEventos() ahora solo guarda los eventos de la sesión actual
-    // en caso de que alguien se registre, pero se borrarán al recargar si no se usan
-    // las líneas de persistencia (que ahora están omitidas).
+    // La función guardarEventos() ahora solo existe de forma simbólica, ya que los datos de evento
+    // se sobrescriben al recargar.
     function guardarEventos() {
         // En este modo, no tiene sentido guardar en localStorage si siempre reiniciaremos
         // la lista desde el código. Para evitar errores, simplemente se mantiene
         // la función, pero no hace nada que persista.
-        // Si desea que las inscripciones persistan *mientras la página NO se recargue*,
-        // mantendremos la función, pero el código de inicio lo sobreescribirá.
     }
     
     /* ========================================================= */
@@ -205,6 +202,28 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- Lógica para info.html (NUEVA INTERFACE 4) ---
+    const formInfo = getEl('form-info');
+    if (formInfo) {
+        formInfo.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const nombre = getEl('info-nombre').value;
+            const tipo = getEl('info-tipo').value;
+            
+            if (nombre.trim() === '' || tipo === '') {
+                alert('Por favor, complete al menos el nombre y el tipo.');
+                return;
+            }
+            
+            alert(`Información registrada (Tipo: ${tipo}, Nombre: ${nombre}).`);
+            // Simulación de guardado (no hay BD)
+            formInfo.reset();
+            // Opcional: Redirigir de vuelta a la app
+            // window.location.href = "app.html";
+        });
+    }
+
+
     // --- Lógica para app.html (Gestor de Eventos) ---
     const appPrincipal = getEl('app-principal');
     if (appPrincipal) { 
@@ -289,7 +308,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p>${evento.descripcion}</p>
                     <p class="cupo-info">Cupo: ${evento.registrados}/${evento.cupo}</p>
                     <button class="btn-registro" data-id="${evento.id}" ${evento.registrados >= evento.cupo ? 'disabled' : ''}>
-                        ${evento.registrados >= evento.cupo ? 'Agotado' : 'Registrarse'}
+                        <i class="fas fa-check-circle"></i> ${evento.registrados >= evento.cupo ? 'Agotado' : 'Registrarse'}
                     </button>
                 `;
                 eventosContainer.appendChild(tarjeta);
