@@ -1,4 +1,3 @@
-
 // Variables globales 
 let usuariosRegistrados = [];
 let infoAdicional = [];
@@ -220,6 +219,7 @@ function renderizarEventos(lista) {
             </article>
         `;
     }
+
 }
 
 function manejarRegistro(eventoId) {
@@ -309,6 +309,7 @@ function verAsistentes(id) {
 }
 
 function eliminarEvento(id) {
+
     const modal = document.createElement('div');
     modal.className = 'modal-backdrop show';
     modal.innerHTML = `
