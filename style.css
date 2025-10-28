@@ -1,5 +1,3 @@
-/* Estilos CSS Globales de la Aplicación ULEAM (Version de Saneamiento) */
-
 :root {
     --color-uleam-rojo: #A91A1E;
     --color-uleam-gris: #6B6A69;
@@ -152,7 +150,7 @@ h1, h2 {
     text-align: center;
 }
 
-/* 🎯 LOGOTIPO UNIFICADO Y FIJO PARA LOGIN / REGISTRO / INFO */
+/* LOGOTIPO UNIFICADO Y FIJO PARA LOGIN / REGISTRO / INFO */
 .login-logo-img,
 .logo-img {
     display: block;
@@ -162,7 +160,7 @@ h1, h2 {
     object-fit: after contain;
 }
 
-/* 🛑 Títulos de formularios */
+/* Títulos de formularios */
 .contenedor h2 {
     color: var(--color-uleam-rojo);
     margin-top: -20px;
@@ -232,7 +230,7 @@ h1, h2 {
 
 /* --- Botones --- */
 
-/* 1. Botón Primario de Formulario (Login / Submit - ULEAM Gris) */
+/* 1. Botón Primario de Formulario (Login / Submit) */
 .btn-entrar {
     width: 100%;
     background-color: var(--color-uleam-gris);
@@ -254,7 +252,7 @@ h1, h2 {
     transform: translateY(-2px);
 }
 
-/* 2. Botón Secundario de Formulario (Navegación / Enlace - ULEAM Rojo Outlined) */
+/* 2. Botón Secundario de Formulario (Navegación / Enlace) */
 .btn-secondary {
     width: 100%;
     background-color: transparent;
@@ -265,7 +263,7 @@ h1, h2 {
     cursor: pointer;
     font-size: 1em;
     font-weight: bold;
-    margin-top: 10px; /* Separación pequeña del botón primario */
+    margin-top: 10px; 
     transition: all 0.3s ease;
 }
 
@@ -299,7 +297,7 @@ h1, h2 {
     transform: translateY(-1px);
 }
 
-/* 4. 🌟 BOTÓN PRINCIPAL DE REGISTRO (Registro.html) - Usando Gradiente */
+/* 4.BOTÓN PRINCIPAL DE REGISTRO (Registro.html)*/
 #btnRegistrar {
     width: 100%;
     background: linear-gradient(135deg, #A91A1E 0%, #C92B2E 100%);
