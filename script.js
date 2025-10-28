@@ -1,11 +1,6 @@
-// script.js (VERSIÓN FINAL Y COMPLETA - CORREGIDA)
-
 document.addEventListener('DOMContentLoaded', () => {
 
-    /* ========================================================= */
-    /* ===== BASE DE DATOS MOCK: Usuarios y Roles (PERSISTENTE) ===== */
-    /* ========================================================= */
-    
+    /* Simulacion de base de datos */
     const getEl = (id) => document.getElementById(id);
     
     // Usuarios iniciales
@@ -17,14 +12,14 @@ document.addEventListener('DOMContentLoaded', () => {
     let usuariosRegistrados = JSON.parse(localStorage.getItem('usuarios')) || usuariosIniciales; 
     localStorage.setItem('usuarios', JSON.stringify(usuariosRegistrados));
 
-    // Base de Datos Mock (Información Adicional - NUEVO)
+    // Base de Datos
     let infoAdicional = JSON.parse(localStorage.getItem('infoAdicional')) || [];
     function guardarInfoAdicional() {
         localStorage.setItem('infoAdicional', JSON.stringify(infoAdicional));
     }
 
 
-    /* --- Base de Datos Mock (Eventos POR DEFECTO) --- */
+    /* Eventos POR DEFECTO */
     const eventosPorDefecto = [
         { id: 1, titulo: "Ceremonia de Elección de Reina", fecha: "2025-10-28T18:00", descripcion: "Organizador: AFU-Asociación femenina Universitaria.", cupo: 200, registrados: 0, lugar: "Uleam - Plaza Centenario" }, 
         { id: 2, titulo: "Sesión conmemorativa (primer año)", fecha: "2025-10-29T10:00", descripcion: "Organiza: Instituto de neurociencias.", cupo: 150, registrados: 0, lugar: "Auditorio de comunicación" },
@@ -39,9 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function guardarEventos() {} 
 
-    /* ========================================================= */
-    /* ===== 2. FUNCIONES GLOBALES DE UTILIDAD Y VALIDACIÓN ===== */
-    /* ========================================================= */
+    /* Utilidad y validacion*/
     
     window.inputFoco = function(elemento) { elemento.style.borderColor = "#3366cc"; }
     window.inputFuera = function(elemento) { elemento.style.borderColor = "#ccc"; }
@@ -138,11 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    /* ========================================================= */
-    /* ===== 3. LÓGICA ESPECÍFICA DE CADA PÁGINA (MPA) ===== */
-    /* ========================================================= */
-    
-    // --- Lógica para index.html/login.html (Login) ---
+    // Lógica para index.html/login.html
     const formLogin = getEl('form-login');
     if (formLogin) { 
         formLogin.addEventListener('submit', (e) => {
@@ -195,18 +184,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Lógica para info.html (Registro de Información Adicional) ---
+    // Registro de Informacion adicional 
     const formInfo = getEl('form-info');
     if (formInfo) {
-        
-        // ❌ CÓDIGO ELIMINADO: La restricción que redirigía al administrador.
-        /* const userRole = localStorage.getItem('userRole');
-        if (userRole === 'admin') {
-            alert('El administrador ya es dueño y no necesita registrar información adicional.');
-            window.location.href = "app.html"; 
-            return; // Detiene la ejecución del script en info.html para el admin
-        }
-        */
         
         formInfo.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -239,7 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // --- Lógica para app.html (Gestor de Eventos) ---
+    // Logica Gestor de Eventos
     const appPrincipal = getEl('app-principal');
     if (appPrincipal) { 
 
@@ -267,7 +247,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (linkCrearEvento) linkCrearEvento.style.display = role === 'admin' ? 'inline-flex' : 'none';
             if (linkMisEventos) linkMisEventos.style.display = role === 'admin' ? 'inline-flex' : 'none';
             
-            // ✅ CORRECCIÓN: Ahora el botón 'Registrar Info' es visible para todos.
+            //Ahora el botón 'Registrar Info' es visible para todos.
             if (linkRegistrarInfo) {
                 linkRegistrarInfo.style.display = 'inline-flex'; 
             }
@@ -281,7 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setMenuVisibility(userRole);
 
 
-        // --- FUNCIONES DE GESTIÓN DE VISTAS Y EVENTOS ---
+        //GESTIÓN DE VISTAS Y EVENTOS
         
         window.eliminarEvento = function(id) {
             const confirmacion = confirm("¿Estás seguro de que quieres eliminar este evento?");
@@ -467,5 +447,3 @@ document.addEventListener('DOMContentLoaded', () => {
         mostrarVistaApp('lista-eventos');
     }
 });
-
-
