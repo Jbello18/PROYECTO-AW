@@ -23,7 +23,7 @@ function getEl(id) {
 
 // FUNCIÓN DE INICIALIZACIÓN
 document.addEventListener('DOMContentLoaded', function() {
-    // 1. Inicialización de la Base de Datos (Usuarios por defecto)
+    // 1. simulacion de base de datos
     const usuariosIniciales = [
         { email: 'admin@eventos.com', clave: '12345678', nombre: 'Admin Master', rol: 'admin' },
         { email: 'usuario@eventos.com', clave: 'password8', nombre: 'Juan User', rol: 'usuario' },
@@ -299,12 +299,12 @@ function renderizarGestionEventos() {
 
 function notificarEvento(id) {
     const evento = eventos.find(e => e.id === id);
-    alert(`Simulación: Notificación enviada a los ${evento.registrados} asistentes de: ${evento.titulo}`);
+    alert(`Notificación enviada a los ${evento.registrados} asistentes de: ${evento.titulo}`);
 }
 
 function verAsistentes(id) {
     const evento = eventos.find(e => e.id === id);
-    alert(`Simulación: Lista de asistentes para: ${evento.titulo}. (Solo se muestra en consola, ya que es una simulación)`);
+    alert(`Lista de asistentes para: ${evento.titulo}.`);
     console.log(`Asistentes registrados para ${evento.titulo}:`, usuariosRegistrados.filter(u => u.rol === 'usuario'));
 }
 
